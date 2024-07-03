@@ -15,10 +15,9 @@ export const POST = async (req: Request) => {
     try {
         const { title, description, pictureUrl } = await req.json();
 
-        if (!title) {
-            return new NextResponse('Title is required', { status: 400 });
+        if (!title || !description || !pictureUrl) {
+            return new NextResponse('Title, description, and picture URL are required', { status: 400 });
         }
-
         const post = await db.post.create({
             data: {
                 title,

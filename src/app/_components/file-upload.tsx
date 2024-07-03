@@ -1,5 +1,6 @@
 import { UploadDropzone } from "~/lib/uploadthing";
 import { ourFileRouter } from "../api/uploadthing/core";
+import toast from "react-hot-toast";
 
 interface FileUploadProps {
   onChange: (url?: string) => void;
@@ -17,10 +18,10 @@ const FileUpload = ({ onChange, endpoint }: FileUploadProps) => {
           onChange(undefined); // Handle case where URL is not available
         }
       }}
-      // Optionally handle upload errors
-      // onUploadError={(error: Error) => {
-      //   toast.error(`${error?.message}`);
-      // }}
+      
+      onUploadError={(error: Error) => {
+        toast.error(`${error?.message}`);
+      }}
     />
   );
 };

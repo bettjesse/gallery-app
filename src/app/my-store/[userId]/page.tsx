@@ -1,49 +1,51 @@
-import Link from "next/link";
+import { db } from "~/server/db"
 import Image from "next/image";
-import { getServerAuthSession } from "~/server/auth";
-import { db } from "~/server/db";
+import Link from "next/link";
+import LikeButton from "~/app/_components/like-button";
 
-import LikeButton from "./_components/like-button";
+const ImageIdPage = async ({
+    params
+  }: {
+    params: { userId: string}
+  }) => {
 
-export default async function Home() {
-  const session = await getServerAuthSession();
+
+   
+   
 
 
-
-  // Fetch posts with user information
-  const postsWithUser = await db.post.findMany({
-    orderBy: {
-      title: "asc",
+  // Fetch the image based on imageId
+  const myImages = await db.post.findMany({
+    where: {
+      createdById: params.userId // Filter by the user's ID
     },
     include: {
       createdBy: {
         select: {
-          name: true, // Selecting the 'name' field from the User relation
-        },
-      },
-    },
+          name: true
+        }
+      }
+    }
   });
-
-  return (
-    <div className="flex flex-col items-center">
+    return  (
+      <div className="flex flex-col items-center">
       <div className="flex flex-col mt-12 w-full px-8 mb-4">
         <div className="flex items-center justify-between w-full mb-2">
-          <h1 className="text-xl text-white font-semibold">Gallery</h1>
+          <h1 className="text-xl text-white font-semibold">My store</h1>
           <Link href="/image">
             <button className="px-4 py-2 rounded bg-[#D927C7] text-white">
               Add Picture
             </button>
           </Link>
         </div>
-        <h4 className="text-sm text-[#212121]">Community Gallery</h4>
+        <h4 className="text-sm text-[#212121]">My recent uploads</h4>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
           {/* Rendering posts */}
-          {postsWithUser.map((post) => (
+          {myImages?.map((post) => (
             <div key={post.id} className="relative">
               {/* Image */}
               <div className="relative h-52 rounded-lg overflow-hidden">
-
               {post.pictureUrl && (
   <div className="relative h-52 rounded-lg overflow-hidden">
     <Image
@@ -54,6 +56,7 @@ export default async function Home() {
     />
   </div>
 )}
+
               </div>
 
               {/* Overlay content */}
@@ -90,5 +93,7 @@ export default async function Home() {
         </div>
       </div>
     </div>
-  );
+
+    )
 }
+export default ImageIdPage
