@@ -43,6 +43,7 @@ export const ImageForm = () => {
       
       // Optionally, refresh the page or navigate to another route
       router.push('/'); // Example: Navigate back to home page
+      router.refresh()
     } catch (error) {
       console.error("Error creating post", error);
       if (axios.isAxiosError(error)) {
@@ -113,7 +114,7 @@ export const ImageForm = () => {
           </label>
           <input
             type="text"
-            className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm sm:text-sm"
+            className="mt-1 block w-full p-2 border border-white rounded-md shadow-sm sm:text-sm text-black"
             value={title}
             placeholder="Fancy Amazing Picture"
             onChange={(e) => setTitle(e.target.value)}
@@ -124,7 +125,7 @@ export const ImageForm = () => {
             Description
           </label>
           <textarea
-            className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm sm:text-sm"
+            className="mt-1 block w-full p-2 border border-white rounded-md shadow-sm sm:text-sm text-black"
             value={description}
             placeholder="Picture of an Amazing view, Blue Sky Polar Mountains..."
             onChange={(e) => setDescription(e.target.value)}
