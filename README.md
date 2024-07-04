@@ -22,7 +22,7 @@ To run the Gallery App locally, follow these steps:
 
 ### Clone the Repository:
 ```shell
-gt clone https://github.com/bettjesse/gallery-app.git
+git clone https://github.com/bettjesse/gallery-app.git
  ```
 
 ### Install Dependencies: 
