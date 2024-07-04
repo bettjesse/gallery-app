@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import toast from "react-hot-toast";
 import { BsArrowLeft } from "react-icons/bs";
-import FileUpload from "./file-upload"; // Adjust the import path if necessary
+import FileUpload from "./file-upload"; 
 import Link from "next/link";
 
 // Define the form schema
