@@ -1,18 +1,29 @@
-"use client"
-import Link from 'next/link';
-import { usePathname } from 'next/navigation'; // Assuming usePathname is correctly imported
+import { getServerAuthSession } from '~/server/auth';
+import { BottomNavItem } from './bottom-nav-item';
 
-const BottomNavigation = () => {
-  const pathname = usePathname();
+const BottomNavigation = async() => {
+  const session = await getServerAuthSession();
+
+  const routes = [
+    {
+      label: "Community",
+      href: "/",
+    },
+    {
+      label: "My Store",
+      href: session?.user ? `/my-store/${session.user.id}` : "/api/auth/signin",
+    },
+  ];
 
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-[#606060] p-4 flex justify-around md:hidden rounded-md">
-      <Link href="/">
-        <p className={`text-white ${pathname === '/' ? 'text-[#D927C7]' : ''}`}> Community</p>
-      </Link>
-      <Link href="/my-store">
-        <p className={`text-white ${pathname === '/my-store' ? 'text-[#D927C7]' : ''}`}>My Store</p>
-      </Link>
+      {routes.map((route) => (
+        <BottomNavItem
+          key={route.href}
+          label={route.label}
+          href={route.href}
+        />
+      ))}
     </div>
   );
 };

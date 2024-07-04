@@ -13,9 +13,9 @@ export const SidebarItem = ({ label, href }: SidebarItemProps) => {
   const router = useRouter();
 
   const isActive =
-  (pathname === "/" && href === "/") || // Exact match for home route
-  pathname === href || // Exact match for other routes
-  (pathname.startsWith(href) && href !== "/"); // Prefix match for nested routes
+    (pathname === "/" && href === "/") || // Exact match for home route
+    (pathname !== "/" && pathname.startsWith(href) && href !== "/") || // Prefix match for other routes, ensuring href is not "/"
+    (pathname === href); // Exact match for other routes
 
   const onClick = () => {
     router.push(href);
@@ -26,7 +26,7 @@ export const SidebarItem = ({ label, href }: SidebarItemProps) => {
       onClick={onClick}
       type="button"
       className={cn(
-        "flex items-center gap-x-2 text-white text-sm font-[500] pl-6 transition-all ",
+        "flex items-center gap-x-2 text-white text-sm font-[500] pl-6 transition-all",
         isActive && "bg-[#D927C7] text-white rounded-lg"
       )}
     >
