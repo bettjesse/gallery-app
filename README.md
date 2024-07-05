@@ -1,29 +1,62 @@
-# Create T3 App
+# Gallery App
+Welcome to the Gallery App, where users can share photos and engage with the community by liking photos. This application is built using Next.js, NeonDB, Uploadthing, TypeScript, and Tailwind CSS.
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
 
-## What's next? How do I make an app with this?
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+## Key Features
 
-## Learn More
+1. User Authentication with NextAuth: Users can sign up, log in, and log out securely. Only logged-in users can like photos, including their own.
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+2. Photo Posting using Uploadthing: Users can upload and share photos with the community .
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+3. Liking Photos: Logged-in users can like photos posted by others or themselves.
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+4. Real-time Updates: Likes and posts are updated in real-time using NeonDB, ensuring a dynamic user experience.
 
-## How do I deploy this?
+5. Responsive Design: The app is designed to be fully responsive, ensuring a seamless experience across devices.
+   
+# Getting Started
+To run the Gallery App locally, follow these steps:
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+### Clone the Repository:
+```shell
+git clone https://github.com/bettjesse/gallery-app.git
+ ```
+
+### Install Dependencies: 
+```shell
+ npm install
+```
+
+```shell
+ npm run dev 
+```
+
+
+# ENV file
+```js
+DATABASE_URL=
+NEXTAUTH_SECRET=
+NEXTAUTH_URL="http://localhost:3000"
+GITHUB_CLIENT_ID=
+GITHUB_CLIENT_SECRET=
+UPLOADTHING_SECRET=
+UPLOADTHING_APP_ID=
+
+```
+
+
+# Configure GitHub OAuth
+
+
+Go to GitHub Developer Settings.
+Click on "OAuth Apps" in the left sidebar.
+Click "New OAuth App".
+Fill in the details:
+Application name: Gallery App
+Homepage URL: http://localhost:3000
+Authorization callback URL: http://localhost:3000/api/auth/callback/github
+Click "Register application" to get your Client ID and Client Secret.
+
