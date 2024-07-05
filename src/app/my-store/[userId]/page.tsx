@@ -52,53 +52,54 @@ const ImageIdPage = async ({
         <h4 className="text-sm text-[#212121]">My recent uploads</h4>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-          {/* Rendering each image post */}
-          {myImages?.map((post) => (
-            <div key={post.id} className="relative">
-              {/* Image */}
-              <div className="relative h-52 rounded-lg overflow-hidden">
-                {post.pictureUrl && (
-                  <Image
-                    src={post.pictureUrl}
-                    alt={post.title}
-                    layout="fill"
-                    objectFit="cover"
-                  />
-                )}
-              </div>
+  {/* Rendering each image post */}
+  {myImages?.map((post) => (
+    <div key={post.id} className="relative group">
+      {/* Image */}
+      <div className="relative h-52 rounded-lg overflow-hidden">
+        {post.pictureUrl && (
+          <Image
+            src={post.pictureUrl}
+            alt={post.title}
+            layout="fill"
+            objectFit="cover"
+          />
+        )}
+      </div>
 
-              {/* Overlay content */}
-              <div className="absolute inset-0 flex flex-col justify-end p-4 bg-black bg-opacity-50 text-white">
-                {/* Top left: User info */}
-                {post.createdBy ? (
-                  <div className="flex items-center mb-2">
-                    <div className="bg-[#D927C7] rounded-full w-10 h-10 flex items-center justify-center mr-2">
-                      <span className="text-white font-semibold text-lg">
-                        {post.createdBy.name ? post.createdBy.name[0] : "-"}
-                      </span>
-                    </div>
-                    <span className="text-white font-semibold">
-                      By {post.createdBy.name}
-                    </span>
-                  </div>
-                ) : (
-                  <div className="text-white font-semibold mb-2">Unknown User</div>
-                )}
-
-                {/* Bottom left: Title and Description */}
-                <div className="mt-auto">
-                  <h2 className="text-lg font-semibold">{post.title}</h2>
-                  <p className="text-sm mt-1">
-                    {post.description}
-                  </p>
-                </div>
-
-                {/* Bottom right: Like button */}
-                <LikeButton postId={post.id} initialLiked={false} />
-              </div>
+      {/* Overlay content */}
+      <div className="absolute inset-0 flex flex-col justify-end p-4 bg-black bg-opacity-50 text-white group-hover:bg-opacity-0 transition-opacity duration-300">
+        {/* Top left: User info */}
+        {post.createdBy ? (
+          <div className="flex items-center mb-2">
+            <div className="bg-[#D927C7] rounded-full w-10 h-10 flex items-center justify-center mr-2">
+              <span className="text-white font-semibold text-lg">
+                {post.createdBy.name ? post.createdBy.name[0] : "-"}
+              </span>
             </div>
-          ))}
+            <span className="text-white font-semibold">
+              By {post.createdBy.name}
+            </span>
+          </div>
+        ) : (
+          <div className="text-white font-semibold mb-2">Unknown User</div>
+        )}
+
+        {/* Bottom left: Title and Description */}
+        <div className="mt-auto">
+          <h2 className="text-lg font-semibold">{post.title}</h2>
+          <p className="text-sm mt-1">
+            {post.description}
+          </p>
         </div>
+
+        {/* Bottom right: Like button */}
+        <LikeButton postId={post.id} initialLiked={false} />
+      </div>
+    </div>
+  ))}
+</div>
+
       </div>
     </div>
   );
